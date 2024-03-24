@@ -25,8 +25,11 @@ const  Quiz  = ({data}:any) => {
   console.log(data)
   const { questions } = data;
   const { question, answers, correctAnswer } = questions[activeQuestion];
+  
+  
   const answerSelected = (answer: any, index: any) => {
     setChecked(true);
+    setSelectedAnswerIndex(index);
     // console.log(answer);
     if (answer === correctAnswer) {
       setSelectedAnswers(true);
@@ -38,6 +41,7 @@ const  Quiz  = ({data}:any) => {
   };
 
   const nextQuestion = () => {
+    setSelectedAnswerIndex(null);
     setResult((prev) =>
       selectedAnswers
         ? {
@@ -76,11 +80,12 @@ const  Quiz  = ({data}:any) => {
               <h3 className="text-black  ">{question}</h3>
               {answers.map((answer:any, i:any) => (
                 <li
-                  className={` text-black ${
-                    selectedAnswerIndex === i ? "li-selected" : "li-hover"
-                  } `}
-                  key={i}
-                  onClick={() => answerSelected(answer, i)}
+                key={i}
+                onClick={() => answerSelected(answer, i)}
+                className={` text-black ${
+                  selectedAnswerIndex === i ? "li-selected" : "li-hover"
+                } `}
+                
                 >
                   {answer}
                 </li>
