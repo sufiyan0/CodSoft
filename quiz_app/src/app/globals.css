@@ -10,8 +10,10 @@
 
 html, body {
   /* overflow-x: hidden; */
-  background-color: #ffffff;
+  background-color: #fffdfc;
 }
+
+
 
 main {
   padding: 1rem;
@@ -24,12 +26,17 @@ main {
   font-size: 1rem;
   border-radius: 4px;
   cursor: pointer;
-  background-color: #808080;
-  color: #f8f8f8;
+  background-color: #0891b2;
+  color: #fff;
+  font-weight: 600;
+  font-size: 24px;
 }
 
 .btn-disabled {
-  background-color: lightgray;
+  background-color: #7dd3fc;
+  color:#eaf2f3;
+  font-weight: 600;
+  font-size: 24px;
 }
 
 li {
@@ -39,21 +46,24 @@ li {
   padding: 16px 8px;
   color: #000105;
   border: 1px solid lightgray;
+  border-radius: 5px;
+  font-size: 20px;
+  font-weight: 400;
 }
 
 .li-hover:hover {
-  background-color: #d8d8d8;
+  background-color: #67e8f9;
   columns: #fff;
 }
 
 .li-selected {
   color: #fff;
-  background-color: #001b6e;
+  background-color: #06b6d4;
 }
 
 .containerss {
   max-width: 740px;
-  /* width: 100%; */
+ 
   margin: auto;
   padding: 1rem;
 }

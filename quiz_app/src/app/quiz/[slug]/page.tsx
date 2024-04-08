@@ -33,6 +33,7 @@ useEffect(() => {
 
 
 
+
   
 if(activeQuiz === General){
   return (
