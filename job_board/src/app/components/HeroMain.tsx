@@ -1,10 +1,21 @@
+'use client'
+import { client } from "../../../sanity/lib/client";
 import Image from "next/image";
 import React from "react";
 // import { Image } from "next/image";
 import headphones from "../public/headphones.webp";
 
+const getClient = async () => {
+  const res = await client.fetch(
+    `*[_type == "jobs"]`
+  )
+  return res
+}
 
-const HeroMain = () => {
+
+const HeroMain = async () => {
+  const data:any = await getClient();
+  console.log(data)
   return (
     <div>
       <section className="bg-white dark:bg-gray-900 min-h-screen items-center justify-center flex">
@@ -29,9 +40,9 @@ const HeroMain = () => {
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                  clip-rule="evenodd"
+                  clipRule="evenodd"
                 ></path>
               </svg>
             </a>

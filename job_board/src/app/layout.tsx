@@ -15,9 +15,9 @@ export default function RootLayout({children,}: Readonly<{children: React.ReactN
   return (
     <html lang="en">
       <body suppressHydrationWarning={true}>
-        <NavBar/>
+        {/* <NavBar/> */}
         {children}
-        <Footer/>
+        {/* <Footer/> */}
         </body>
     </html>
   );
