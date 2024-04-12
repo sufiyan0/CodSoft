@@ -1,5 +1,6 @@
 import Image from "next/image";
 import HeroMain from "./components/HeroMain";
+import JobCard from "./components/JobCard";
 
 export default function Home() {
   return (
@@ -7,6 +8,7 @@ export default function Home() {
     <div className="">
       
         <HeroMain/>
+        {/* <JobCard  /> */}
     </div>
     </>
   );

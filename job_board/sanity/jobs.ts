@@ -22,6 +22,11 @@ export const jobs = defineType({
       type: 'text',
     }),
     defineField({
+      name: 'shortdescription',
+      title: 'Short Description',
+      type: 'text',
+    }),
+    defineField({
         name: 'author',
         title: 'Author',
         type: 'object',

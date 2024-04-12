@@ -1,21 +1,24 @@
-'use client'
+// 'use client'
 import { client } from "../../../sanity/lib/client";
 import Image from "next/image";
-import React from "react";
+// import React, { useEffect } from "react";
 // import { Image } from "next/image";
 import headphones from "../public/headphones.webp";
-
-const getClient = async () => {
-  const res = await client.fetch(
-    `*[_type == "jobs"]`
-  )
-  return res
-}
+import { useDispatch, useSelector } from "react-redux";
+import { getdata } from "../lib/features/jobsdata/jobdataSlice";
+import JobList from "./JobList";
+import JobCard from "./JobCard";
+import { useEffect } from "react";
 
 
-const HeroMain = async () => {
-  const data:any = await getClient();
-  console.log(data)
+
+const HeroMain = ()  =>  {
+  // useEffect(() => {
+    
+  //   const njd =  useSelector((state: any) => state.jobdata);
+  //   console.log(njd)
+  // })
+  
   return (
     <div>
       <section className="bg-white dark:bg-gray-900 min-h-screen items-center justify-center flex">
@@ -64,6 +67,8 @@ const HeroMain = async () => {
           </div>
         </div>
       </section>
+      {/* <JobList/> */}
+      <JobCard/>
     </div>
   );
 };

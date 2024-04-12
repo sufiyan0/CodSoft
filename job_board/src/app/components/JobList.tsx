@@ -1,5 +1,29 @@
 import React from "react";
+import { client } from "../../../sanity/lib/client";
 
+
+const getClient = async () => {
+  const res = await client.fetch(
+    `*[_type == "jobs"]{
+      _id,
+      author,
+      jobTitle,
+      description,
+      role,
+      _type
+    }`
+  )
+  return res
+}
+
+interface job {
+  _id: string,
+  author:[],
+  jobTitle: string,
+  description: string,
+  role: string,
+  _type: string
+}
 const JobList = () => {
   return(  
   <div>
@@ -36,9 +60,9 @@ const JobList = () => {
         >
           <path
             stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
             d="M1 5h12m0 0L9 1m4 4L9 9"
           />
         </svg>
