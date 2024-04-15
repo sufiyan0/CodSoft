@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 
 const Quiz = ({ data }: any) => {
@@ -87,7 +87,7 @@ const Quiz = ({ data }: any) => {
   };
   console.log(finalResult);
 
-  useEffect(() => {}, [nextQuestion]);
+  useCallback(() => {}, [nextQuestion]);
 
   return (
     <>

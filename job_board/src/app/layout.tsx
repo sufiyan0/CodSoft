@@ -1,10 +1,10 @@
-
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import Providers from "./lib/features/Provider";
+import { UserProfile, UserProvider } from "@auth0/nextjs-auth0/client";
 
 // export const metadata: Metadata = {
 //   title: "Job Board",
@@ -16,9 +16,15 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body suppressHydrationWarning={true}>
-        <Providers >{children}</Providers>
-      </body>
+      <UserProvider>
+        <body suppressHydrationWarning={true}>
+          <Providers>
+            <NavBar />
+            {children}
+            <Footer/>
+          </Providers>
+        </body>
+      </UserProvider>
     </html>
   );
 }

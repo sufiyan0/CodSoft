@@ -1,24 +1,20 @@
-'use client'
+// 'use client'
 import React, { useEffect } from "react";
 import { client } from "../../../sanity/lib/client";
-import { Dispatch } from "@reduxjs/toolkit";
-import { jobdata } from "../lib/features/jobsdata/jobdataSlice";
-import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
 
 
 const getClient = async () => {
-
-
-
   const res = await client.fetch(
-    `*[_type == "jobs"][0...2]{
+    `*[_type == "jobs"]{
       _id,
       author,
       jobTitle,
       description,
       role,
-      _type
+      _type,
+      shortdescription,
+      company
     }`
   );
   return res;
@@ -33,7 +29,9 @@ const getjobdetails = async (id:string) => {
       jobTitle,
       description,
       role,
-      _type
+      _type,
+      shortdescription,
+      company
     }`
   );
   return res;
@@ -46,6 +44,8 @@ interface job {
   description: string;
   role: string;
   _type: string;
+  shortdescription:string;
+  company:string
 }
 const JobCard = async () => {
   // const dispatch = useDispatch()
@@ -53,9 +53,10 @@ const JobCard = async () => {
   const jobDetails: job[] = await getClient();
 
  
+  
 
   return (
-    <div className="flex flex-wrap ">
+    <div className='flex flex-wrap items-center justify-center'>
       {jobDetails.map((job: job) => (
         <div key={job._id} className="max-w-sm min-w-72 justify-center flex flex-col p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 m-4">
           <svg
@@ -73,11 +74,11 @@ const JobCard = async () => {
             </h5>
           </a>
           <p className="mb-3 font-normal text-gray-500 dark:text-gray-400">
-            {job.description}
+            {job.shortdescription}
           </p>
-          <a
-            href="#"
-            className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          <Link
+            href={`/jobdetails/${job._id}`}
+            className="inline-flex items-center px-3 py-4 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               
           >
             Read more
@@ -97,9 +98,8 @@ const JobCard = async () => {
               />
             </svg>
             
-          </a>
+          </Link>
 
-          <Link className="text-white text-3xl" href={`/jobdetails/${job._id}`}>view details now</Link>
         </div>
       ))}
     </div>

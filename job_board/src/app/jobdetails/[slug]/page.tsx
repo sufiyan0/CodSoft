@@ -1,8 +1,10 @@
-"use client";
-import React, { useState } from "react";
+// "use client";
+// import React, { useState } from "react";
 import { client } from "../../../../sanity/lib/client";
 import Link from "next/link";
 import Form from "@/app/components/Form";
+// import { useUser } from "@auth0/nextjs-auth0/client";
+import JobDetails from "@/app/components/JobDetails";
 
 interface job {
   _id: string;
@@ -14,8 +16,7 @@ interface job {
 }
 
 const page = async ({ params }: { params: { slug: string } }) => {
-  // const [formApply, setFormApply] = useState(false);
-
+  // const { user } = useUser();
   const getClient = async () => {
     const res: job[] = await client.fetch(
       `*[_type == "jobs" && _id == "${params.slug}"]{
@@ -24,59 +25,25 @@ const page = async ({ params }: { params: { slug: string } }) => {
         jobTitle,
         description,
         role,
-        _type
+        _type,
+        shortdescription,
+        company
       }`
     );
     return res;
   };
-  const jobDetails: any = await getClient(); 
+  const jobDetails: any = await getClient();
 
   return (
-    <div>
-      <h1>{jobDetails[0].jobTitle}</h1>
-      <p>{jobDetails[0].description}</p>
-      <p>{jobDetails[0].role}</p>
-      <Link href={'/applynow'}>Apply now</Link>
+    
+    <div className="flex min-h-screen flex-col p-10 dark:bg-slate-800 bg-slate-100  dark:text-white text-black ">
+     
+
+      {jobDetails && <JobDetails jobDetails={jobDetails[0]} />}
+
       
     </div>
   );
-
-  // formApply ? (
-  //   <Form />
-  // ) : (
-  //   <div className="">
-  //     <h1>{jobDetails[0].jobTitle}</h1>
-  //     <p>{jobDetails[0].description}</p>
-  //     <p>{jobDetails[0].role}</p>
-  //     <Link href={"#"} onClick={() => setFormApply(true)}>
-  //       Apply now
-  //     </Link>
-  //   </div>
-  // );
-
-  // if(!formApply == true){
-  //   return(
-  //     <div>
-  //       <Form/>
-  //     </div>
-  //   )
-  // }
-
-  // console.log(jobDetails);
-  // if(!formApply){
-
-  //   return(
-  //     <div>
-  //     <h1>{jobDetails[0].jobTitle}</h1>
-  //     <p>{jobDetails[0].description}</p>
-  //     <p>{jobDetails[0].role}</p>
-
-  //     <Link href={'#'}>Apply now</Link>
-  //     <Form/>
-
-  //   </div>
-  // )
-  // }
 };
 
 export default page;
